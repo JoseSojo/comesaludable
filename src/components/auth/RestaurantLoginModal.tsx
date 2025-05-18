@@ -2,17 +2,17 @@ import React from 'react';
 import { X, Store } from 'lucide-react';
 import { ApiAuthAdapter } from '../../infrastructure/adapters/ApiAuthAdapter';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
 
 interface RestaurantLoginModalProps {
   isOpen: boolean;
   onClose: () => void;
+  redirect: (param: string) => void;
 }
 
-const RestaurantLoginModal: React.FC<RestaurantLoginModalProps> = ({ isOpen, onClose }) => {
+const RestaurantLoginModal: React.FC<RestaurantLoginModalProps> = ({ redirect,isOpen, onClose }) => {
   const [code, setCode] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
-  const navigate = useNavigate();
+  const navigate = redirect;
 
   const adapters = new ApiAuthAdapter();
 
@@ -36,7 +36,7 @@ const RestaurantLoginModal: React.FC<RestaurantLoginModalProps> = ({ isOpen, onC
       toast.success(response.message);
       window.localStorage.setItem(`comesaludable_token`, response.token);
       window.localStorage.setItem(`comesaludable_data`, JSON.stringify(response.data));
-      navigate(`/restaurant`, { viewTransition:true });
+      navigate(`/restaurant`);
       window.location.reload();
 
       onClose();

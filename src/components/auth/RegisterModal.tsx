@@ -1,11 +1,13 @@
 import React from 'react';
 import { X } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { ApiUserAdapter } from '../../infrastructure/adapters/ApiUserAdapter';
+import toast from 'react-hot-toast';
 
 interface RegisterModalProps {
   isOpen: boolean;
   onClose: () => void;
   onLoginClick: () => void;
+  redirect: (param: string) => void;
 }
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onLoginClick }) => {
@@ -13,7 +15,9 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onLoginC
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    lastname: '',
+    acceptEmail: 'si',
+    age: 0
   });
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -21,9 +25,16 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onLoginC
     e.preventDefault();
     setIsLoading(true);
     try {
-      // In a real app, this would call a registration API
-      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      const adapter = new ApiUserAdapter();      
+      const response = await adapter.create({ data:formData });
+
+      if(response.error) {
+        return toast.error(`Error al crear la cuenta`);
+      }
+      console.log(response);
       onLoginClick(); // Switch to login after successful registration
+      return toast.success(`Cuenta ${response.body.email} creada`);
     } finally {
       setIsLoading(false);
     }
@@ -47,13 +58,13 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onLoginC
         >
           <X className="w-4 h-4" />
         </button>
-        
+
         <h3 className="font-bold text-lg mb-4">Create an Account</h3>
-        
+
         <form onSubmit={handleSubmit}>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Full Name</span>
+              <span className="label-text">Nomber</span>
             </label>
             <input
               type="text"
@@ -65,22 +76,51 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onLoginC
               required
             />
           </div>
-          
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Apellido</span>
+            </label>
+            <input
+              type="text"
+              name="lastname"
+              placeholder="John Doe"
+              className="input input-bordered"
+              value={formData.lastname}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
           <div className="form-control mt-4">
             <label className="label">
-              <span className="label-text">Email</span>
+              <span className="label-text">Correo</span>
             </label>
             <input
               type="email"
               name="email"
-              placeholder="your@email.com"
+              placeholder="tucorreo@dominio.com"
               className="input input-bordered"
               value={formData.email}
               onChange={handleChange}
               required
             />
           </div>
-          
+
+          <div className="form-control mt-4">
+            <label className="label">
+              <span className="label-text">Edad</span>
+            </label>
+            <input
+              type="number"
+              name="age"
+              placeholder="tucorreo@dominio.com"
+              className="input input-bordered"
+              value={formData.age}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
           <div className="form-control mt-4">
             <label className="label">
               <span className="label-text">Password</span>
@@ -95,22 +135,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onLoginC
               required
             />
           </div>
-          
-          <div className="form-control mt-4">
-            <label className="label">
-              <span className="label-text">Confirm Password</span>
-            </label>
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm your password"
-              className="input input-bordered"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          
+
           <div className="form-control mt-6">
             <button
               type="submit"
@@ -121,9 +146,9 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onLoginC
             </button>
           </div>
         </form>
-        
+
         <div className="divider">OR</div>
-        
+
         <p className="text-center">
           Already have an account?{' '}
           <button

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { LogOut, Home, User2, Clock, Settings} from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import DataUser from '../../components/user/DataUser';
 import ActicityUser from '../../components/user/ActivityUser';
 import SettingsUser from '../../components/user/SettingsUser';
 import PhotoProfile from '../../components/user/PhotoProfile';
 import ButtonChangeSection from '../../components/user/ChangeSectionProfile';
+import { useLocation } from 'wouter';
 
 const UserProfile: React.FC = () => {
     const { user, logout } = useAuth();
     const [activeTab, setActiveTab] = useState<'profile' | 'activity' | 'settings'>('profile');
-    const navigate = useNavigate();
+    const location = useLocation();
 
 
     return (
@@ -21,7 +21,7 @@ const UserProfile: React.FC = () => {
                     <a className="btn btn-ghost text-xl">Mi Perfíl</a>
                 </div>
                 <div className="flex-none">
-                    <button onClick={() => navigate(`/`)} className="btn btn-ghost gap-2">
+                    <button onClick={() => location[1](`/`)} className="btn btn-ghost gap-2">
                         <Home className="w-5 h-5" />
                         <span className='hidden md:block'>Inicio</span>
                     </button>

@@ -1,79 +1,104 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavbarRestaurant from '../../components/restaurant/NavbarRestaurant';
 import UiCard from '../../components/restaurant/card/UiCard';
 import MenuTable from '../../components/restaurant/menu/MenuTable';
 import MenuCards from '../../components/restaurant/menu/MenuCards';
 import MenuViewToggle from '../../components/restaurant/menu/MenuViewToggle';
 import { FileText, Plus } from 'lucide-react';
-import { menus } from '../../infrastructure/data/data';
+import ShowMenu from '../../components/admin/dashboard/menu/ShowMenu';
+import { ApiMenuCrudAdapter } from '../../infrastructure/adapters/crud/ApiMenuCrudAdapter';
+import toast from 'react-hot-toast';
+import FilterTable from '../../components/common/table/FilterTable';
+import InputSearch from '../../components/common/form/InputSearch';
+import { config } from '../../config';
 
 const RestaurantMenu: React.FC = () => {
   const [viewType, setViewType] = useState<'table' | 'cards'>('table');
 
+  const [menus, setMenus] = useState<any[]>([]);
+  const [pagination, setPagination] = useState<any>({});
+
+  const [category, setCategory] = useState<string | null>(null);
+  const [type, setType] = useState<string | null>(null);
+  const [param, setParam] = useState(``);
+  const [reload, setReload] = useState(false);
+  const [skip, setSkip] = useState(0);
+  const [take, setTake] = useState(10);
+  const [id, setId] = useState<string | null>(null);
+  const [modalFicha, setModalFicha] = useState(false);
+
+  const HandleFicha = async (id: string) => {
+    setId(id);
+    setModalFicha(true);
+  }
+
+  useEffect(() => {
+    (async () => {
+      const adaptaer = new ApiMenuCrudAdapter();
+      const response = await adaptaer.filter({ skip, take, param, categoryId: category ? category : ``, typeId: type ? type : `` });
+      if (response.error) {
+        return toast.error(`No se obtuvieron resultados`);
+      }
+      console.log(response);
+      setMenus(response.body.data);
+      setPagination(response.body.pagination)
+    })()
+  }, [param, type, category, reload])
+
   return (
     <div className="min-h-screen bg-base-100">
+      {
+        id && modalFicha && <ShowMenu
+          id={id}
+          isOpen={modalFicha}
+          onClose={() => setModalFicha(false)}
+          reload={() => setReload(!reload)}
+        />
+      }
       <NavbarRestaurant />
 
       <div className="space-y-6 animate-fade-in w-[90%] m-auto mt-11">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
-        <h1 className="text-2xl font-bold text-gray-900">Menus</h1>
-        <div className="flex items-center space-x-3">
-          <MenuViewToggle viewType={viewType} onChange={setViewType} />
-          
-          <button className="btn btn-outline">
-            <FileText className="h-4 w-4 mr-2" />
-            Export
-          </button>
-          
-          <button className="btn btn-primary">
-            <Plus className="h-4 w-4 mr-2" />
-            Add Menu
-          </button>
-        </div>
-      </div>
-      
-      <UiCard>
-        <div className="mb-6 flex flex-col sm:flex-row justify-between gap-4">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search menus..."
-              className="input pr-10"
-            />
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-              <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-              </svg>
-            </div>
-          </div>
-          
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+          <h1 className="text-2xl font-bold text-gray-900">Menus</h1>
           <div className="flex items-center space-x-3">
-            <select className="input max-w-xs">
-              <option value="">All Categories</option>
-              <option value="Bowls">Bowls</option>
-              <option value="Breakfast">Breakfast</option>
-              <option value="Mains">Mains</option>
-              <option value="Drinks">Drinks</option>
-              <option value="Salads">Salads</option>
-              <option value="Wraps">Wraps</option>
-            </select>
-            
-            <select className="input max-w-xs">
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-              <option value="popular">Most Popular</option>
-              <option value="rating">Highest Rated</option>
-            </select>
+            <MenuViewToggle viewType={viewType} onChange={setViewType} />
+
+            <button className="btn btn-outline">
+              <FileText className="h-4 w-4 mr-2" />
+              Export
+            </button>
+
+            <button className="btn btn-primary">
+              <Plus className="h-4 w-4 mr-2" />
+              Add Menu
+            </button>
           </div>
         </div>
-        
-        {viewType === 'table' ? (
-          <MenuTable menus={menus} />
-        ) : (
-          <MenuCards menus={menus} />
-        )}
-      </UiCard>
-    </div>
+
+        <UiCard>
+          <FilterTable
+            create={false}
+            openModal={() => { }}
+            param={param}
+            setParam={setParam}
+            take={take}
+            setTake={setTake}
+            skip={skip}
+            setSkip={setSkip}
+            reload={() => setReload(!reload)}
+            pagination={pagination}
+          >
+            <InputSearch text='Tipo' path={config.api.endpoints.search.type} setValue={(value: string) => setType(value)} uniqueId='filterTypeMenuPage' />
+            <InputSearch text='Categoría' path={config.api.endpoints.search.category} setValue={(value: string) => setCategory(value)} uniqueId='filterCategoryMenuPage' />
+          </FilterTable>
+
+          {viewType === 'table' ? (
+            <MenuTable reload={() => setReload(!reload)} HandleFicha={HandleFicha} menus={menus} />
+          ) : (
+            <MenuCards menus={menus} />
+          )}
+        </UiCard>
+      </div>
 
     </div>
   );

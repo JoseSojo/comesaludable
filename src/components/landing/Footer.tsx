@@ -1,5 +1,6 @@
 import React from 'react';
 import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { Link } from 'wouter';
 
 const Footer: React.FC = () => {
   return (
@@ -12,51 +13,51 @@ const Footer: React.FC = () => {
               Connecting health-conscious diners with nutritionist-approved restaurants for better eating choices.
             </p>
             <div className="flex gap-4 mt-4">
-              <a className="btn btn-circle btn-outline btn-sm">
+              <Link href='#' target='_blank' className="btn btn-circle btn-outline btn-sm">
                 <Facebook className="w-4 h-4" />
-              </a>
-              <a className="btn btn-circle btn-outline btn-sm">
+              </Link>
+              <Link href='#' target='_blank' className="btn btn-circle btn-outline btn-sm">
                 <Twitter className="w-4 h-4" />
-              </a>
-              <a className="btn btn-circle btn-outline btn-sm">
+              </Link>
+              <Link href='#' target='_blank' className="btn btn-circle btn-outline btn-sm">
                 <Instagram className="w-4 h-4" />
-              </a>
-              <a className="btn btn-circle btn-outline btn-sm">
+              </Link>
+              <Link href='#' target='_blank' className="btn btn-circle btn-outline btn-sm">
                 <Youtube className="w-4 h-4" />
-              </a>
+              </Link>
             </div>
           </div>
 
           <div>
-            <span className="footer-title">Quick Links</span>
-            <a className="link link-hover">Find Restaurants</a>
-            <a className="link link-hover">Meet Nutritionists</a>
-            <a className="link link-hover">Healthy Menus</a>
-            <a className="link link-hover">Join as Restaurant</a>
+            <span className="footer-title">Enlaces Rápidos</span>
+            <Link href='/admin/login' className="link link-hover">Administración</Link>
+            <Link href='/search/restaurant' target='_blank' className="link link-hover">Restaurantes</Link>
+            <Link href='/search/menus' target='_blank' className="link link-hover">Menus</Link>
+            <Link href='#' target='_blank' className="link link-hover"></Link>
           </div>
 
           <div>
             <span className="footer-title">Support</span>
-            <a className="link link-hover">Help Center</a>
-            <a className="link link-hover">Terms of Service</a>
-            <a className="link link-hover">Privacy Policy</a>
-            <a className="link link-hover">Contact Us</a>
+            <Link href='#' target='_blank' className="link link-hover">Help Center</Link>
+            <Link href='#' target='_blank' className="link link-hover">Terms of Service</Link>
+            <Link href='#' target='_blank' className="link link-hover">Privacy Policy</Link>
+            <Link href='#' target='_blank' className="link link-hover">Contact Us</Link>
           </div>
 
           <div>
             <span className="footer-title">Contact</span>
-            <a className="link link-hover flex items-center gap-2">
+            <Link href='#' target='_blank' className="link link-hover flex items-center gap-2">
               <Mail className="w-4 h-4" />
               contact@healthyeats.com
-            </a>
-            <a className="link link-hover flex items-center gap-2">
+            </Link>
+            <Link href='#' target='_blank' className="link link-hover flex items-center gap-2">
               <Phone className="w-4 h-4" />
               +1 (555) 123-4567
-            </a>
-            <a className="link link-hover flex items-center gap-2">
+            </Link>
+            <Link href='#' target='_blank' className="link link-hover flex items-center gap-2">
               <MapPin className="w-4 h-4" />
               123 Health Street, Foodie City
-            </a>
+            </Link>
           </div>
         </div>
 

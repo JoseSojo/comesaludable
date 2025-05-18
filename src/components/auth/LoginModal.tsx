@@ -2,26 +2,27 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { ApiAuthAdapter } from '../../infrastructure/adapters/ApiAuthAdapter';
-import { useNavigate } from 'react-router-dom';
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
   onRegisterClick: () => void;
+  redirect: (param: string) => void;
 }
 
 
-const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onRegisterClick }) => {
+const LoginModal: React.FC<LoginModalProps> = ({ redirect,isOpen, onClose, onRegisterClick }) => {
   const [data, setData] = useState<{ email: string, password: string }>({ email: ``, password: `` });
   const [errors, setErrors] = useState<any>({});
   const [isLoading, setIsLoading] = React.useState(false);
-  const navigate = useNavigate();
+  const navigate = redirect;
 
   const adapters = new ApiAuthAdapter();
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     try {
+      setErrors
       // In a real app, this would verify the restaurant code
       // await new Promise(resolve => setTimeout(resolve, 1000));
       const response = await adapters.login(data.email, data.password);
@@ -38,7 +39,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onRegisterClic
       toast.success(response.message);
       window.localStorage.setItem(`comesaludable_token`, response.token);
       window.localStorage.setItem(`comesaludable_data`, JSON.stringify(response.data));
-      navigate(`/restaurant`, { viewTransition: true });
+      navigate(`/profile`);
       window.location.reload();
 
       onClose();

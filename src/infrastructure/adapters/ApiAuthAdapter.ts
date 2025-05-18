@@ -4,13 +4,22 @@ import { config } from '../../config';
 export class ApiAuthAdapter implements AuthenticationPort {
   private async fetchWithAuth(endpoint: string, options: RequestInit = {}): Promise<Response> {
     const url = `${config.api.baseUrl}${endpoint}`;
-    const response = await fetch(url, {
-      ...options,
+    let requestOptions = { 
+      ...options, 
       headers: {
         'Content-Type': 'application/json',
         ...options.headers,
-      },
-    });
+      }
+    }
+
+    if(options.body) {
+      requestOptions.body = options.body;
+    }
+
+    console.log(requestOptions);
+
+
+    const response = await fetch(url, requestOptions);
 
     if (!response.ok) {
       const error = await response.json();
@@ -45,10 +54,10 @@ export class ApiAuthAdapter implements AuthenticationPort {
     return data;
   }
 
-  async adminLogin(username: string, password: string, secretKey: string) {
+  async adminLogin(username: string, password: string) {
     const response = await this.fetchWithAuth(config.api.endpoints.auth.adminLogin, {
       method: 'POST',
-      body: JSON.stringify({ username, password, secretKey }),
+      body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
     return data;

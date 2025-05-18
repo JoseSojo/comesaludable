@@ -35,9 +35,9 @@ const RestaurantTestimonials: React.FC = () => {
   return (
     <section className="py-20 bg-gradient-to-b from-base-200 to-base-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-4">Restaurant Success Stories</h2>
+        <h2 className="text-4xl font-bold text-center mb-4">Historias de éxito de restaurantes</h2>
         <p className="text-center text-gray-600 mb-12">
-          Hear from restaurants that have transformed their business through healthy certification
+        Escuche a restaurantes que han transformado su negocio gracias a la certificación saludable
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

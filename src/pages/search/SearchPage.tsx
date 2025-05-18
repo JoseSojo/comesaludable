@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Search, Filter, MapPin } from 'lucide-react';
-import { useServices } from '../../application/context/ServiceContext';
 import { Restaurant, RestaurantMenu } from '../../domain/entities/Restaurant';
 
 const SearchPage: React.FC = () => {
-  const { restaurantService } = useServices();
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState<'restaurants' | 'menus'>('restaurants');
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
@@ -15,11 +13,11 @@ const SearchPage: React.FC = () => {
     setIsLoading(true);
     try {
       if (activeTab === 'restaurants') {
-        const results = await restaurantService.getFeaturedRestaurants();
-        setRestaurants(results);
+        // const results = await restaurantService.getFeaturedRestaurants();
+        // setRestaurants(results);
       } else {
-        const results = await restaurantService.getFeaturedMenus();
-        setMenus(results);
+        // const results = await restaurantService.getFeaturedMenus();
+        // setMenus(results);
       }
     } finally {
       setIsLoading(false);

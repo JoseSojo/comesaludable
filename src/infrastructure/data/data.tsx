@@ -1,163 +1,122 @@
-import { Menu, Comment, TopMenu } from '../interface/DataType';
+import { faker } from '@faker-js/faker';
+import { Menu, Comment, TopMenu, Restaurants } from '../interface/DataType';
 
 export const menus: Menu[] = [
   {
-    id: 1,
     name: 'Mediterranean Bowl',
-    description: 'Fresh quinoa bowl with grilled vegetables, hummus, and olive oil dressing',
     price: 12.99,
-    calories: 450,
-    protein: 15,
-    carbs: 65,
-    fats: 12,
     image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
-    category: 'Bowls',
-    isPopular: true,
-    views: 1245,
-    sales: 352,
-    rating: 4.8,
     createdAt: '2023-01-15',
+    about: ``,
+    allergens: [],
+    categoryReference: {id:``,name:``},
+    forPeople:2,
+    id: ``,
+    ingredients: [],
+    restauranteReference:{id:``,name:``},
+    tags:[],
   },
   {
-    id: 2,
     name: 'Avocado Toast',
-    description: 'Whole grain bread with mashed avocado, cherry tomatoes, and microgreens',
     price: 9.99,
-    calories: 320,
-    protein: 8,
-    carbs: 42,
-    fats: 16,
     image: 'https://images.pexels.com/photos/1351238/pexels-photo-1351238.jpeg',
-    category: 'Breakfast',
-    isPopular: true,
-    views: 986,
-    sales: 278,
-    rating: 4.6,
     createdAt: '2023-02-03',
+    about: ``,
+    allergens: [],
+    categoryReference: {id:``,name:``},
+    forPeople:2,
+    id: ``,
+    ingredients: [],
+    restauranteReference:{id:``,name:``},
+    tags:[],
   },
   {
-    id: 3,
     name: 'Protein Powerhouse',
-    description: 'Grilled chicken breast with sweet potatoes and steamed broccoli',
     price: 13.99,
-    calories: 520,
-    protein: 42,
-    carbs: 48,
-    fats: 8,
     image: 'https://images.pexels.com/photos/361184/asparagus-steak-veal-steak-veal-361184.jpeg',
-    category: 'Mains',
-    isPopular: false,
-    views: 756,
-    sales: 198,
-    rating: 4.5,
     createdAt: '2023-02-15',
+    about: ``,
+    allergens: [],
+    categoryReference: {id:``,name:``},
+    forPeople:2,
+    id: ``,
+    ingredients: [],
+    restauranteReference:{id:``,name:``},
+    tags:[],
   },
   {
-    id: 4,
     name: 'Green Detox Smoothie',
-    description: 'Spinach, banana, almond milk, chia seeds, and protein powder blend',
     price: 7.99,
-    calories: 280,
-    protein: 18,
-    carbs: 34,
-    fats: 6,
     image: 'https://images.pexels.com/photos/1346347/pexels-photo-1346347.jpeg',
-    category: 'Drinks',
-    isPopular: true,
-    views: 1102,
-    sales: 321,
-    rating: 4.7,
     createdAt: '2023-03-01',
+    about: ``,
+    allergens: [],
+    categoryReference: {id:``,name:``},
+    forPeople:2,
+    id: ``,
+    ingredients: [],
+    restauranteReference:{id:``,name:``},
+    tags:[],
   },
   {
-    id: 5,
     name: 'Salmon Poke Bowl',
-    description: 'Raw salmon cubes with rice, avocado, cucumber, and ponzu sauce',
     price: 14.99,
-    calories: 480,
-    protein: 28,
-    carbs: 52,
-    fats: 14,
     image: 'https://images.pexels.com/photos/842571/pexels-photo-842571.jpeg',
-    category: 'Bowls',
-    isPopular: true,
-    views: 845,
-    sales: 234,
-    rating: 4.9,
     createdAt: '2023-03-10',
+    about: ``,
+    allergens: [],
+    categoryReference: {id:``,name:``},
+    forPeople:2,
+    id: ``,
+    ingredients: [],
+    restauranteReference:{id:``,name:``},
+    tags:[],
   },
   {
-    id: 6,
     name: 'Vegan Caesar Salad',
-    description: 'Romaine lettuce with plant-based chicken, dairy-free parmesan, and croutons',
     price: 11.99,
-    calories: 380,
-    protein: 12,
-    carbs: 28,
-    fats: 22,
     image: 'https://images.pexels.com/photos/406152/pexels-photo-406152.jpeg',
-    category: 'Salads',
-    isPopular: false,
-    views: 689,
-    sales: 176,
-    rating: 4.4,
     createdAt: '2023-03-18',
+    about: ``,
+    allergens: [],
+    categoryReference: {id:``,name:``},
+    forPeople:2,
+    id: ``,
+    ingredients: [],
+    restauranteReference:{id:``,name:``},
+    tags:[],
   },
   {
-    id: 7,
     name: 'Berry Breakfast Bowl',
-    description: 'Greek yogurt with mixed berries, granola, and honey',
     price: 8.99,
-    calories: 340,
-    protein: 16,
-    carbs: 46,
-    fats: 10,
     image: 'https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg',
-    category: 'Breakfast',
-    isPopular: false,
-    views: 721,
-    sales: 187,
-    rating: 4.5,
     createdAt: '2023-04-05',
+    about: ``,
+    allergens: [],
+    categoryReference: {id:``,name:``},
+    forPeople:2,
+    id: ``,
+    ingredients: [],
+    restauranteReference:{id:``,name:``},
+    tags:[],
   },
   {
-    id: 8,
     name: 'Thai Chicken Wrap',
-    description: 'Grilled chicken with peanut sauce, vegetables, and herbs in a whole wheat wrap',
     price: 10.99,
-    calories: 420,
-    protein: 24,
-    carbs: 38,
-    fats: 18,
     image: 'https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg',
-    category: 'Wraps',
-    isPopular: false,
-    views: 634,
-    sales: 156,
-    rating: 4.3,
     createdAt: '2023-04-12',
+    about: ``,
+    allergens: [],
+    categoryReference: {id:``,name:``},
+    forPeople:2,
+    id: ``,
+    ingredients: [],
+    restauranteReference:{id:``,name:``},
+    tags:[],
   },
 ];
 
 export const comments: Comment[] = [
-  {
-    id: 1,
-    menuId: 1,
-    userName: 'Sarah J.',
-    text: 'The Mediterranean Bowl is amazing! So fresh and flavorful. Will definitely order again.',
-    rating: 5,
-    isPositive: true,
-    createdAt: '2023-04-18',
-  },
-  {
-    id: 2,
-    menuId: 1,
-    userName: 'Michael T.',
-    text: 'Good balance of flavors but could use a bit more protein.',
-    rating: 4,
-    isPositive: true,
-    createdAt: '2023-04-20',
-  },
   {
     id: 3,
     menuId: 2,
@@ -259,7 +218,7 @@ export const topMenus: TopMenu[] = [
 
 export const getDailyViewsData = () => {
   const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  
+
   return {
     labels: days,
     datasets: [
@@ -280,7 +239,7 @@ export const getMenuViewsComparisonData = () => {
     datasets: [
       {
         label: 'Views',
-        data: menus.slice(0, 5).map(menu => menu.views),
+        data: menus.slice(0, 5).map(menu => menu.price),
         backgroundColor: [
           'rgba(34, 197, 94, 0.7)',
           'rgba(249, 115, 22, 0.7)',
@@ -297,7 +256,7 @@ export const getMenuViewsComparisonData = () => {
 export const getCommentsAnalysisData = () => {
   const positiveComments = comments.filter(comment => comment.isPositive).length;
   const negativeComments = comments.filter(comment => !comment.isPositive).length;
-  
+
   return {
     labels: ['Positive', 'Negative'],
     datasets: [
@@ -316,7 +275,7 @@ export const getMenuConsumptionData = () => {
     datasets: [
       {
         label: 'Sales',
-        data: menus.map(menu => menu.sales),
+        data: menus.map(menu => menu.price),
         backgroundColor: 'rgba(249, 115, 22, 0.7)',
         borderColor: 'rgba(249, 115, 22, 1)',
         borderWidth: 1,
@@ -327,7 +286,7 @@ export const getMenuConsumptionData = () => {
 
 export const getCurrentViewsData = () => {
   const hours = ['9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM'];
-  
+
   return {
     labels: hours,
     datasets: [
@@ -342,3 +301,183 @@ export const getCurrentViewsData = () => {
     ],
   };
 };
+
+export const getCurrentAddress = (): Restaurants => {
+
+  const locations = [
+    [10.4806, -66.9036],   // Caracas
+    [10.2333, -67.6000],   // Maracay
+    [10.1801, -68.0039],   // Valencia
+    [8.6226, -70.2075],    // Barinas
+    [9.5553, -69.1956],    // Guanare (Guárico)
+    [10.6586, -71.6370],   // Maracaibo
+    [8.3404, -72.4397],    // San Cristóbal
+    [10.2286, -67.4744],   // Los Teques
+    [10.2138, -64.6338],   // Puerto La Cruz
+    [8.1292, -63.5409]     // Ciudad Bolívar
+  ];
+
+  // Seleccionar una ubicación aleatoria del array
+  const [latitud, longitud] = faker.helpers.arrayElement(locations);
+
+  return {
+    about: ``,
+    access: ``,
+    address: ``,
+    createAt: new Date(),
+    updateAt: new Date(),
+    deleteAt: new Date(),
+    environmentId: ``,
+    environmentReference: {},
+    horario: ``,
+    id: ``,
+    name: `Restaurant`,
+    phone: ``,
+    tag: [],
+    typeId: ``,
+    typeReference:{},
+    locations: [
+      { location: [latitud, longitud]
+      }
+    ],
+    website: ``
+  }
+}
+
+export const restaurants = [
+  {
+    id: '1',
+    name: 'Verde & Sano',
+    description: 'Cocina orgánica y sostenible con ingredientes locales de temporada',
+    rating: 4.8,
+    location: 'Zona Gourmet',
+    cuisine: 'Orgánica',
+    position: [10.2355, -67.5987] as [number, number],
+    address: "Calle Principal 123, Madrid",
+    phone: "+34 912 345 678",
+    website: "www.lacasadelsabor.es",
+    hours: "Lun-Dom: 12:00-23:00",
+    coverImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
+    metrics: {
+      monthlyVisits: 12500,
+      avgRating: 4.8,
+      totalReviews: 450,
+      responseRate: "95%"
+    },
+    gallery: [
+    ]
+  },
+  {
+    id: '2',
+    name: 'Equilibrio',
+    description: 'Fusión de sabores mediterráneos con un toque moderno',
+    rating: 4.6,
+    location: 'Centro Ciudad',
+    cuisine: 'Mediterránea',
+    position: [10.2469, -67.5958] as [number, number],
+    address: "Calle Principal 123, Madrid",
+    phone: "+34 912 345 678",
+    website: "www.lacasadelsabor.es",
+    hours: "Lun-Dom: 12:00-23:00",
+    coverImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
+    metrics: {
+      monthlyVisits: 12500,
+      avgRating: 4.8,
+      totalReviews: 450,
+      responseRate: "95%"
+    },
+    gallery: [
+    ]
+  },
+  {
+    id: '3',
+    name: 'Nutrición Vital',
+    description: 'Platos balanceados con proteínas magras y vegetales frescos',
+    rating: 4.7,
+    location: 'Distrito Financiero',
+    cuisine: 'Fitness',
+    position: [10.5068, -66.9146] as [number, number],
+    address: "Calle Principal 123, Madrid",
+    phone: "+34 912 345 678",
+    website: "www.lacasadelsabor.es",
+    hours: "Lun-Dom: 12:00-23:00",
+    coverImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
+    metrics: {
+      monthlyVisits: 12500,
+      avgRating: 4.8,
+      totalReviews: 450,
+      responseRate: "95%"
+    },
+    gallery: [
+    ]
+  },
+  {
+    id: '4',
+    name: 'Sabor Natural',
+    description: 'Especialistas en bowls y ensaladas personalizadas',
+    rating: 4.5,
+    location: 'Plaza Central',
+    cuisine: 'Bowl & Ensaladas',
+    position: [10.4806, -66.9036] as [number, number],
+    address: "Calle Principal 123, Madrid",
+    phone: "+34 912 345 678",
+    website: "www.lacasadelsabor.es",
+    hours: "Lun-Dom: 12:00-23:00",
+    coverImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
+    metrics: {
+      monthlyVisits: 12500,
+      avgRating: 4.8,
+      totalReviews: 450,
+      responseRate: "95%"
+    },
+    gallery: [
+     
+    ]
+  },
+  {
+    id: '4',
+    name: 'Sabor Natural',
+    description: 'Especialistas en bowls y ensaladas personalizadas',
+    rating: 4.5,
+    location: 'Plaza Central',
+    cuisine: 'Bowl & Ensaladas',
+    position: [10.4236, -66.8516] as [number, number],
+    address: "Calle Principal 123, Madrid",
+    phone: "+34 912 345 678",
+    website: "www.lacasadelsabor.es",
+    hours: "Lun-Dom: 12:00-23:00",
+    coverImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
+    metrics: {
+      monthlyVisits: 12500,
+      avgRating: 4.8,
+      totalReviews: 450,
+      responseRate: "95%"
+    },
+    gallery: [
+     
+    ]
+  },
+  {
+    id: '4',
+    name: 'Sabor Natural',
+    description: 'Especialistas en bowls y ensaladas personalizadas',
+    rating: 4.5,
+    location: 'Plaza Central',
+    cuisine: 'Bowl & Ensaladas',
+    position: [10.2469, -67.5958] as [number, number],
+    address: "Calle Principal 123, Madrid",
+    phone: "+34 912 345 678",
+    website: "www.lacasadelsabor.es",
+    hours: "Lun-Dom: 12:00-23:00",
+    coverImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
+    metrics: {
+      monthlyVisits: 12500,
+      avgRating: 4.8,
+      totalReviews: 450,
+      responseRate: "95%"
+    },
+    gallery: [
+      
+    ]
+  }
+];

@@ -6,22 +6,23 @@ const Hero: React.FC = () => {
     <div className="hero min-h-screen bg-gradient-to-b from-green-50 to-white">
       <div className="hero-content text-center">
         <div className="max-w-3xl">
-          <h1 className="text-5xl font-bold text-primary mt-16">
-            Discover Healthy Restaurants
-            <span className="text-accent"> Recommended by Nutritionists</span>
+          <h1 className="text-3xl font-bold text-primary mt-16">
+            Explora entre restaurantes, y menús increibles
+            <br />
+            <span className="text-accent text-5xl">Saludables y recomendados</span>
           </h1>
           <p className="py-6 text-lg text-gray-600">
-            Explore a curated selection of restaurants that prioritize your health without compromising on taste. 
-            Each restaurant is carefully vetted by certified nutritionists to ensure you get the best quality meals.
+            Hoy más que nunca comer saludable no es una opción, es un estilo de vida. 
+            ¿Qué esperas para explorar y visitar <strong>Restaurantes</strong> y degustar de sus deliciosos y saludables <strong>Menús</strong>?
           </p>
           <div className="flex justify-center lg:flex-row flex-col gap-4">
             <button className="btn btn-primary">
               <Leaf className="w-5 h-5" />
-              Explore Restaurants
+              Ver Restaurantes
             </button>
             <button className="btn btn-outline btn-accent">
               <Heart className="w-5 h-5" />
-              View Healthy Menus
+              Ver menús saludables
             </button>
           </div>
           

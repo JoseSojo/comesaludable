@@ -33,9 +33,9 @@ const Nutritionists: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-base-100">
+    <section className="hidden py-20 bg-base-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-4">Our Expert Nutritionists</h2>
+        <h2 className="text-4xl font-bold text-center mb-4">Nuestros expoert</h2>
         <p className="text-center text-gray-600 mb-12">
           Meet our certified nutritionists who carefully evaluate and recommend healthy restaurants
         </p>

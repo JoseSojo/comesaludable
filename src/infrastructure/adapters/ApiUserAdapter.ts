@@ -5,6 +5,7 @@ import { CreateResponseInterface, DeleteResponseInterface, FilterResponseInterfa
 export class ApiUserAdapter implements UserPort {
   private async fetchWith(endpoint: string, options: RequestInit = {}, body?: any): Promise<Response> {
     const url = `${config.api.baseUrl}${endpoint}`;
+    console.log(body);
     if (!options || options.method?.toUpperCase() == `GET`) {
       const response = await fetch(url, {
         ...options,
@@ -38,11 +39,12 @@ export class ApiUserAdapter implements UserPort {
     return response;
   }
 
-  async create({ }: { data: any; }): Promise<CreateResponseInterface> {
+  async create({ data }: { data: any; }): Promise<CreateResponseInterface> {
     try {
-      const response = await this.fetchWith(config.api.endpoints.user.create, { method: `POST` });
+      const response = await this.fetchWith(config.api.endpoints.user.create, { method: `POST` }, JSON.stringify(data));
       return await response.json()
     } catch (error) {
+      console.log(error);
       return {
         body: {},
         message: `Error al crear usuario`,

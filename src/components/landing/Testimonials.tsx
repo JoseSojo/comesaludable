@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, ThumbsUp, MessageCircle } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 const Testimonials: React.FC = () => {
   const testimonials = [
@@ -38,9 +38,9 @@ const Testimonials: React.FC = () => {
   return (
     <section className="py-20 bg-base-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-4">What Our Users Say</h2>
+        <h2 className="text-4xl font-bold text-center mb-4">Lo que dicen nuestros usuarios</h2>
         <p className="text-center text-gray-600 mb-12">
-          Real experiences from our community of health-conscious diners
+          Experiencias reales de nuestra comunidad de comensales preocupados por su salud
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -67,24 +67,10 @@ const Testimonials: React.FC = () => {
 
                 <div className="flex items-center justify-between mt-4 text-sm text-gray-500">
                   <span>{testimonial.date}</span>
-                  <div className="flex items-center gap-4">
-                    <button className="flex items-center gap-1">
-                      <ThumbsUp className="w-4 h-4" />
-                      {testimonial.likes}
-                    </button>
-                    <button className="flex items-center gap-1">
-                      <MessageCircle className="w-4 h-4" />
-                      {testimonial.replies}
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <button className="btn btn-outline btn-lg">Read More Reviews</button>
         </div>
       </div>
     </section>

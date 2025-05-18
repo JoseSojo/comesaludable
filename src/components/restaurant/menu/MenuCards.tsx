@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu } from '../../../infrastructure/interface/DataType';
-import { Star, Eye, Heart } from 'lucide-react';
+import { Link } from 'wouter';
 
 interface MenuCardsProps {
   menus: Menu[];
@@ -10,40 +10,34 @@ const MenuCards: React.FC<MenuCardsProps> = ({ menus }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
       {menus.map((menu) => (
-        <div key={menu.id} className="card overflow-hidden transition-all duration-300 hover:shadow-md hover:translate-y-[-4px]">
-          <div className="relative">
-            <img 
+        <Link href={`/admin/menus/${menu.id}`} key={menu.id} className="card overflow-hidden transition-all duration-300 hover:shadow-md hover:translate-y-[-4px]">
+          <div className="relative skeleton">
+            {/* <img 
               src={menu.image} 
               alt={menu.name} 
               className="w-full h-48 object-cover"
-            />
-            <div className="absolute top-0 right-0 m-2">
-              {menu.isPopular && (
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
-                  Popular
-                </span>
-              )}
-            </div>
+            /> */}
           </div>
-          
+
           <div className="p-4">
             <div className="flex justify-between items-start">
               <div>
                 <h3 className="text-lg font-semibold">{menu.name}</h3>
-                <p className="text-sm text-gray-500 mt-1">{menu.category}</p>
+                <span className='text-xs'>(para {menu.forPeople} personas)</span>
+                <p className="text-sm text-gray-500 mt-1">{menu.categoryReference.name}</p>
               </div>
               <div className="bg-primary-50 text-primary-700 px-2 py-1 rounded font-medium">
-                ${menu.price.toFixed(2)}
+                ${menu.price}
               </div>
             </div>
-            
-            <p className="text-gray-600 text-sm mt-3 line-clamp-2">{menu.description}</p>
-            
-            <div className="mt-4 flex items-center justify-between">
+
+            <p className="text-gray-600 text-sm mt-3 line-clamp-2">{menu.about}</p>
+
+            {/* <div className="mt-4 flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <div className="flex items-center">
                   <Star className="h-4 w-4 text-yellow-400 mr-1" />
-                  <span className="text-sm font-medium">{menu.rating.toFixed(1)}</span>
+                  <span className="text-sm font-medium">{menu.rating}</span>
                 </div>
                 
                 <div className="flex items-center">
@@ -63,23 +57,35 @@ const MenuCards: React.FC<MenuCardsProps> = ({ menus }) => {
                 </button>
               </div>
             </div>
-            
+             */}
             <div className="mt-3 pt-3 border-t grid grid-cols-3 gap-2 text-center text-xs">
               <div>
-                <p className="text-gray-500">Calories</p>
-                <p className="font-medium">{menu.calories}</p>
+                <p className="text-gray-500">Alergenos <span className='font-black text-xs'>({menu.allergens.length})</span></p>
+                <div className='flex flex-wrap gap-1 mt-2'>
+                  {
+                    menu && menu.allergens.map(allergen => <span className='badge badge-xs'>{allergen}</span>)
+                  }
+                </div>
               </div>
               <div>
-                <p className="text-gray-500">Protein</p>
-                <p className="font-medium">{menu.protein}g</p>
+                <p className="text-gray-500">Ingredientes <span className='font-black text-xs'>({menu.ingredients.length})</span></p>
+                <div className='flex flex-wrap gap-1 mt-2'>
+                  {
+                    menu && menu.ingredients.map(ingredient => <span className='badge badge-xs'>{ingredient}</span>)
+                  }
+                </div>
               </div>
               <div>
-                <p className="text-gray-500">Carbs</p>
-                <p className="font-medium">{menu.carbs}g</p>
+                <p className="text-gray-500">Etiquetas <span className='font-black text-xs'>({menu.tags.length})</span></p>
+                <div className='flex flex-wrap gap-1 mt-2'>
+                  {
+                    menu && menu.tags.map(tag => <span className='badge badge-xs'>{tag}</span>)
+                  }
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

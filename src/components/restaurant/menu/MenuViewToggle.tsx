@@ -18,7 +18,7 @@ const MenuViewToggle: React.FC<MenuViewToggleProps> = ({ viewType, onChange }) =
         }`}
       >
         <Layout className="h-4 w-4 mr-1.5" />
-        <span className="text-sm">Table</span>
+        <span className="text-sm">Tabla</span>
       </button>
       
       <button
@@ -30,7 +30,7 @@ const MenuViewToggle: React.FC<MenuViewToggleProps> = ({ viewType, onChange }) =
         }`}
       >
         <Grid className="h-4 w-4 mr-1.5" />
-        <span className="text-sm">Cards</span>
+        <span className="text-sm">Tarjetas</span>
       </button>
     </div>
   );

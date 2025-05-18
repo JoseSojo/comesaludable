@@ -18,7 +18,7 @@ const Navbar: React.FC<Props> = ({ onLoginClick, onRegisterClick, onRestaurantLo
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
                         <Salad className="h-8 w-8 text-primary" />
-                        <span className="ml-2 text-xl font-semibold text-neutral">HealthySpot</span>
+                        <span className="ml-2 text-xl font-semibold text-neutral">ComeSaludable</span>
                     </div>
 
                     <div className="hidden md:flex items-center space-x-8">
@@ -69,11 +69,17 @@ const Navbar: React.FC<Props> = ({ onLoginClick, onRegisterClick, onRestaurantLo
 
                         {
                             isAuthenticated && !user.access && <>
-                                <a href='/profile' className="nav-link flex gap-2">
-                                    <User2 width={16} />
-                                    <span className='hidden lg:block'>Perfil</span>
-                                </a>
-                                <a href='/profile' className="nav-link flex gap-2">
+                                {user.email !== `comesaludable2025`
+                                    ? <a href='/profile' className="nav-link flex gap-2">
+                                        <User2 width={16} />
+                                        <span className='hidden lg:block'>Perfil</span>
+                                    </a>
+                                    : <a href='/admin' className="nav-link flex gap-2">
+                                        <User2 width={16} />
+                                        <span className='hidden lg:block'>Administración</span>
+                                    </a>
+                                }
+                                <a href='/restaurants' className="nav-link flex gap-2">
                                     <Apple width={16} />
                                     <span className='hidden lg:block'>Restaurantes</span>
                                 </a>
