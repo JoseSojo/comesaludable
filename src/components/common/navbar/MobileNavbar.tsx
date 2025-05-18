@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Home, Search, User, Apple, LogOut, LogIn, BarChart2 } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
+import { useLocation } from 'wouter';
 
 interface Props {
     onLoginClick: () => void;
@@ -12,6 +13,7 @@ const MobileNav: React.FC<Props> = ({ onLoginClick, onRegisterClick, onRestauran
 
     const { isAuthenticated, user, logout } = useAuth();
     const [loginState, setLoginState] = useState(false);
+    const location = useLocation();
 
     return (
         <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-neutral/10 z-50">
@@ -38,7 +40,7 @@ const MobileNav: React.FC<Props> = ({ onLoginClick, onRegisterClick, onRestauran
                     </>
                 }
                 {
-                    user && !user.access &&
+                    user && user.email.includes(`@`) && !user.access &&
                     <a href="#search" className="flex flex-col flex-1 items-center justify-center text-xs text-neutral/60 hover:text-primary transition-colors duration-200">
                         <Apple className="h-6 w-6" />
                         <span>Restaurantes</span>
@@ -48,15 +50,19 @@ const MobileNav: React.FC<Props> = ({ onLoginClick, onRegisterClick, onRestauran
                     <Heart className="h-6 w-6" />
                     <span>Favorites</span>
                 </a>} */}
-                {isAuthenticated && <button onClick={logout} className="flex flex-col flex-1 items-center justify-center text-xs text-neutral/60 hover:text-primary transition-colors duration-200">
+                {isAuthenticated && !user.email.includes(`@`) && <button onClick={()=>location[1](`/admin`)} className="flex flex-col flex-1 items-center justify-center text-xs text-neutral/60 hover:text-primary transition-colors duration-200">
+                    <LogOut className="h-6 w-6" />
+                    <span>Administración</span>
+                </button>}
+                {isAuthenticated && user.email.includes(`@`) && <button onClick={logout} className="flex flex-col flex-1 items-center justify-center text-xs text-neutral/60 hover:text-primary transition-colors duration-200">
                     <LogOut className="h-6 w-6" />
                     <span>Salir</span>
                 </button>}
-                {isAuthenticated && !user.access && <a href="/profile" className="flex flex-col flex-1 items-center justify-center text-xs text-neutral/60 hover:text-primary transition-colors duration-200">
+                {isAuthenticated && user.email.includes(`@`) && !user.access && <a href="/profile" className="flex flex-col flex-1 items-center justify-center text-xs text-neutral/60 hover:text-primary transition-colors duration-200">
                     <User className="h-6 w-6" />
                     <span>Profile</span>
                 </a>}
-                {!isAuthenticated && <button onClick={() => setLoginState(!loginState)} className="relative flex flex-col flex-1 items-center justify-center text-xs text-neutral/60 hover:text-primary transition-colors duration-200">
+                {!isAuthenticated && user.email.includes(`@`) && <button onClick={() => setLoginState(!loginState)} className="relative flex flex-col flex-1 items-center justify-center text-xs text-neutral/60 hover:text-primary transition-colors duration-200">
                     <LogIn className="h-6 w-6" />
                     <span>Entrar</span>
                     {
